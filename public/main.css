@@ -1,0 +1,65 @@
+body{
+    padding-bottom: 200px;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.profile{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.profile img{
+    width: 200px;
+    height: 200px;
+    border-radius: 20%;
+}
+.nameAndContent{
+    display: flex;
+    flex-direction: column;
+}
+.name{
+    font-family: 'Jua', sans-serif;
+    font-size: 30px;
+    margin: 15px;
+}
+.content{
+    margin: 10px;
+}
+
+.post{
+    padding: 13px;
+}
+.post .post_name{
+    font-size: large;
+}
+.post .post_time{
+    font-size: small;
+}
+.post .post_content{
+    margin-top: 7px;
+}
+.post .post_head{
+    display: flex;
+    justify-content: space-between;
+}
+.post_passbuttons input{
+    width: 60px;
+}
+.post_form{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 20px;
+    align-items: center;
+}
+.name_password{
+    margin: 10px;
+}
+textarea{
+    width: 100%;
+    height: 100px;
+}

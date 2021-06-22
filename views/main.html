@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
+    <title>Daehwan</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="profile">
+            <img src="me.jpg" alt="me">
+            <div class="nameAndContent">
+                <div class="name">김대환</div>
+                <div class="content">안녕하세요.<br>익명으로 하고 싶은 말을 게시해주세요.</div>
+            </div>
+        </div>
+        {% for post in posts %}
+        <div class="post">
+            <div class="post_head">
+                <input id="post_id" type="hidden" value="{{post.id}}">
+                <div class="post_name">{{post.name}}</div>
+                <div class="post_passbuttons">
+                    <input id="post_password" type="password" name="password">
+                    <button class="post_edit">수정</button>
+                    <button class="post_delete">삭제</button>
+                </div>
+            </div>
+            <div class="post_time">{{post.updatedAt}}</div>
+            <div class="post_content">{{post.content}}</div>
+        </div>
+        {% endfor %}
+
+        <form class="post_form" action="/post" method="post">
+            <div class="name_password">
+                <input type="text" name="name" placeholder="이름">
+                <input id="password" type="password" name="password" placeholder="비밀번호">
+            </div>
+            <textarea name="content" id="content"></textarea>
+            <button id="post_btn" type="submit">게시</button>
+        </form>
+    </div>
+    {% if pass === false %}
+    <script>alert('비밀번호 틀림');</script>
+    {% endif %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const editBtn = document.querySelectorAll('.post_edit');
+        const deleteBtn = document.querySelectorAll('.post_delete');
+        const password = document.querySelectorAll('#post_password');
+        const postId = document.querySelectorAll('#post_id');
+        for (let i = 0; i < deleteBtn.length; i++) {
+            deleteBtn[i].addEventListener('click', () => {
+                axios.post(`/delete/${postId[i].value}`,{password:password[i].value})
+                    .then((result) => {
+                        window.location.reload();
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        next(err);
+                    })
+                console.log(postId[i].value);
+            });
+        }
+    </script>
+
+</body>
+
+</html>
