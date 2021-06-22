@@ -66,6 +66,23 @@
                 console.log(postId[i].value);
             });
         }
+        for (let i = 0; i < editBtn.length; i++) {
+            editBtn[i].addEventListener('click', () => {
+                const newComment = prompt('바꿀 내용을 입력하세요.');
+                if(!newComment){
+                    return alert('내용을 반드시 입력하셔야 합니다.');
+                }
+                axios.patch(`/edit/${postId[i].value}`,{password:password[i].value, comment:newComment})
+                    .then((result) => {
+                        window.location.reload();
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        next(err);
+                    })
+                console.log(postId[i].value);
+            });
+        }
     </script>
 
 </body>

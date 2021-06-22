@@ -1,8 +1,6 @@
 const express = require('express');
 
 const { Post } = require('../models');
-const { beforeDestroy } = require('../models/post');
-
 const router = express.Router();
 
 router.post('/:id', (req, res, next) => {

@@ -10,8 +10,8 @@ dotenv.config();
 const pageRouter = require('./routes/page');
 const postRouter = require('./routes/post');
 const deleteRouter = require('./routes/delete');
+const editRouter = require('./routes/edit');
 const {sequelize} = require('./models');
-const { Script } = require('vm');
 
 const app = express();
 app.set('port',process.env.PORT || 8001);
@@ -47,6 +47,7 @@ app.use(session({
 app.use('/',pageRouter);
 app.use('/post',postRouter);
 app.use('/delete',deleteRouter);
+app.use('/edit',editRouter);
 
 app.use((req,res,next)=>{
     const error = new Error(`${req.method} ${req.url}라우터가 없습니다.`);
